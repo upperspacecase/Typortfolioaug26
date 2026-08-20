@@ -53,14 +53,35 @@
   header nav a { transition: color .2s; color: var(--dim); }
   header nav a:hover { color: var(--fg); }
   .wordmark { font-weight: 700; letter-spacing: 0.02em; }
+  .burger { display: none; background: none; border: 0; cursor: pointer; padding: 0.4rem 0; }
+  .burger span { display: block; width: 22px; height: 2px; background: var(--fg); margin: 5px 0; transition: transform .25s, opacity .25s; }
+  body.menu-open .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .burger span:nth-child(2) { opacity: 0; }
+  body.menu-open .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 720px) {
+    header nav {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 0.4rem var(--s) 1.2rem;
+    }
+    header nav a { padding: 1rem 0; border-top: 1px solid var(--line); font-size: 0.8rem; }
+    body.menu-open header nav { display: flex; }
+    .burger { display: block; }
+  }
 
   /* ---------- hero ---------- */
   .hero {
     padding: clamp(4rem, 10vh, 8rem) var(--s) clamp(4rem, 9vh, 7rem);
     border-bottom: 1px solid var(--line);
   }
-  #monogram { width: clamp(150px, 22vw, 280px); margin-bottom: clamp(2.5rem, 6vh, 4.5rem); display: block; }
-  #monogram polygon { fill: var(--fg); stroke: var(--bg); stroke-width: 0.45; }
+  .cubeart polygon { fill: var(--fg); stroke: var(--bg); stroke-width: 0.45; }
+  .cubes { width: clamp(110px, 14vw, 170px); margin-bottom: clamp(2.5rem, 6vh, 4rem); display: block; }
+  .cubemark { width: 1.5em; height: 1.5em; vertical-align: -0.4em; margin-right: 0.7em; display: inline-block; }
   .hero h1 {
     font-size: clamp(2rem, 5.4vw, 4.6rem);
     font-weight: 500;
@@ -89,25 +110,6 @@
   .prose p + p { margin-top: 1.4em; }
   .prose strong { font-weight: 700; }
   .prose .dim { color: var(--dim); }
-
-  /* ---------- story split + portrait ---------- */
-  .story-split {
-    display: grid;
-    grid-template-columns: minmax(0, 56ch) minmax(220px, 320px);
-    gap: 3rem 5rem;
-    align-items: start;
-  }
-  .portrait img {
-    width: 100%;
-    display: block;
-    filter: grayscale(1) contrast(1.06);
-    border: 1px solid var(--line);
-  }
-  .portrait figcaption { margin-top: 0.8rem; }
-  @media (max-width: 860px) {
-    .story-split { grid-template-columns: 1fr; }
-    .portrait { max-width: 320px; }
-  }
 
   /* ---------- proof grid ---------- */
   .grid {
@@ -193,12 +195,15 @@
     <a href="#track">Track&nbsp;record</a>
     <a href="#contact">Contact</a>
   </nav>
+  <button class="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <main id="top">
 
   <div class="hero">
-    <svg id="monogram" viewBox="0 15 60 24" aria-label="TY monogram in isometric cubes"></svg>
+    <svg class="cubeart cubes" data-cubes="hero" aria-hidden="true"></svg>
     <h1>I find where AI can create real business value and take it from a messy problem to a <em>working product.</em></h1>
     <div class="sub mono">
       <span>Product &times; Operations &times; AI</span>
@@ -207,22 +212,16 @@
   </div>
 
   <section id="story">
-    <span class="label mono">01 · The gap</span>
-    <div class="story-split">
+    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>01 · The gap</span>
     <div class="prose">
       <p>Companies know AI should change how they operate. Most don't know where it will create real value. <strong>That is the gap I work in.</strong></p>
       <p>I've spent more than a decade moving across operations, product, growth and startups, usually where the problem is messy and nobody quite owns it. AI has turned that range into a distinctive capability: I can understand a business, identify what is genuinely worth changing, and take it from an unclear opportunity to a working product or system.</p>
       <p class="dim">I don't just advise, and I don't just build. I work out what is worth building, then make it real.</p>
     </div>
-    <figure class="portrait">
-      <img src="ty.jpg" alt="Ty Pattison" loading="lazy">
-      <figcaption class="mono">Ty Pattison</figcaption>
-    </figure>
-    </div>
   </section>
 
   <section id="work">
-    <span class="label mono">02 · Proof, not promises</span>
+    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>02 · Proof, not promises</span>
     <div class="prose" style="margin-bottom: 2.6rem;">
       <p>Selected work, chosen for how finished it is and how directly it shows AI creating value. Most of it ships through <strong>10,000 Ideas</strong>, my open-source venture studio.</p>
     </div>
@@ -261,7 +260,7 @@
   </section>
 
   <section id="track">
-    <span class="label mono">03 · Track record</span>
+    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>03 · Track record</span>
     <div class="roles">
       <a class="role" href="https://life-time.co" target="_blank" rel="noopener">
         <span class="mono">Co-Founder</span>
@@ -292,14 +291,14 @@
   </section>
 
   <section class="quote">
-    <span class="label mono">04 · When to call</span>
+    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>04 · When to call</span>
     <h2>&ldquo;Ty is the person to call when we know AI could improve the business, <em>but we don't yet know where to begin or what to build.</em>&rdquo;</h2>
   </section>
 
 </main>
 
 <footer id="contact">
-  <span class="label mono">05 · Contact</span>
+  <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>05 · Contact</span>
   <p class="big"><a href="mailto:taytoddpattison@gmail.com">taytoddpattison@gmail.com</a></p>
   <div class="footlinks mono">
     <a href="https://www.linkedin.com/in/taypattison/" target="_blank" rel="noopener">LinkedIn</a>
@@ -315,48 +314,56 @@
 </footer>
 
 <script>
-/* TY monogram: letterforms built from isometric cubes, matching the
-   black-and-white cube reference. Each cube = 3 rhombic faces drawn
-   in one flat tone with background-coloured seams. */
+/* Isometric cube elements: the studio's visual language, used as accents. */
 (function () {
-  const svg = document.getElementById("monogram");
-  const S = 5;                                  // cube edge (screen units)
-  const RX = S * Math.sqrt(3) / 2, RY = S / 2;  // iso axis projection
-
-  // iso step -> screen offset: r = toward front-right, l = front-left, u = up
+  const S = 5;
+  const RX = S * Math.sqrt(3) / 2, RY = S / 2;
   const pos = (r, l, u) => [(r - l) * RX, (r + l) * RY - u * S];
 
-  // the three visible faces of a cube centred on (cx, cy)
   function faces(cx, cy) {
-    const N  = [cx, cy - S],      M  = [cx, cy],      B = [cx, cy + S];
+    const N = [cx, cy - S], M = [cx, cy], B = [cx, cy + S];
     const NE = [cx + RX, cy - RY], SE = [cx + RX, cy + RY];
     const NW = [cx - RX, cy - RY], SW = [cx - RX, cy + RY];
     return [[N, NE, M, NW], [NW, M, B, SW], [M, NE, SE, B]];
   }
 
-  // letters as [r, l, u] cube positions on the iso grid
-  const LETTERS = [
-    // T: stem of three, flat bar across the top
-    { at: 15, cubes: [[0,0,0],[0,0,1],[0,0,2],[1,-1,2],[-1,1,2]] },
-    // Y: junction + asymmetric arms, stem below
-    { at: 44.7, cubes: [[0,0,-1],[0,0,0],[0,1,1],[1,0,1],[2,0,2]] },
-  ];
+  const SETS = {
+    hero: [[0,1,0],[0,0,0],[1,0,0],[1,1,0],[0,0,1],[1,0,1],[2,-1,2]],
+    mark: [[0,1,0],[1,0,0],[0,0,1]],
+  };
 
-  const BASE = 32; // shared baseline
-  let frag = "";
-  for (const { at, cubes } of LETTERS) {
-    // paint back-to-front: lower, deeper cubes first
+  document.querySelectorAll("svg[data-cubes]").forEach((svg) => {
+    const cubes = SETS[svg.dataset.cubes] || SETS.mark;
+    const pts = cubes.map((c) => pos(...c));
+    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+    const minX = Math.min(...xs) - RX - 1, maxX = Math.max(...xs) + RX + 1;
+    const minY = Math.min(...ys) - S - 1, maxY = Math.max(...ys) + S + 1;
+    svg.setAttribute("viewBox",
+      minX.toFixed(2) + " " + minY.toFixed(2) + " " +
+      (maxX - minX).toFixed(2) + " " + (maxY - minY).toFixed(2));
     const ordered = [...cubes].sort((a, b) => (a[0]+a[1]+a[2]) - (b[0]+b[1]+b[2]));
-    // letter baseline: align lowest cube bottoms
-    const maxY = Math.max(...cubes.map(c => pos(...c)[1]));
+    let frag = "";
     for (const c of ordered) {
       const [x, y] = pos(...c);
-      for (const f of faces(at + x, BASE - maxY + y)) {
-        frag += '<polygon points="' + f.map(p => p[0].toFixed(2) + "," + p[1].toFixed(2)).join(" ") + '"/>';
+      for (const f of faces(x, y)) {
+        frag += '<polygon points="' + f.map((p) => p[0].toFixed(2) + "," + p[1].toFixed(2)).join(" ") + '"/>';
       }
     }
+    svg.innerHTML = frag;
+  });
+
+  const burger = document.querySelector(".burger");
+  if (burger) {
+    burger.addEventListener("click", () => {
+      const open = document.body.classList.toggle("menu-open");
+      burger.setAttribute("aria-expanded", String(open));
+    });
+    document.querySelectorAll("header nav a").forEach((a) =>
+      a.addEventListener("click", () => {
+        document.body.classList.remove("menu-open");
+        burger.setAttribute("aria-expanded", "false");
+      }));
   }
-  svg.innerHTML = frag;
 })();
 </script>
 
