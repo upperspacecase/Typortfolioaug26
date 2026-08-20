@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tay Pattison</title>
+<title>Ty Pattison</title>
 <meta name="description" content="I find where AI can create real business value and take it from a messy problem to a working product.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +59,7 @@
     padding: clamp(4rem, 10vh, 8rem) var(--s) clamp(4rem, 9vh, 7rem);
     border-bottom: 1px solid var(--line);
   }
-  #monogram { width: clamp(220px, 34vw, 420px); margin-bottom: clamp(2.5rem, 6vh, 4.5rem); display: block; }
+  #monogram { width: clamp(150px, 22vw, 280px); margin-bottom: clamp(2.5rem, 6vh, 4.5rem); display: block; }
   #monogram polygon { fill: var(--fg); stroke: var(--bg); stroke-width: 0.45; }
   .hero h1 {
     font-size: clamp(2rem, 5.4vw, 4.6rem);
@@ -89,6 +89,25 @@
   .prose p + p { margin-top: 1.4em; }
   .prose strong { font-weight: 700; }
   .prose .dim { color: var(--dim); }
+
+  /* ---------- story split + portrait ---------- */
+  .story-split {
+    display: grid;
+    grid-template-columns: minmax(0, 56ch) minmax(220px, 320px);
+    gap: 3rem 5rem;
+    align-items: start;
+  }
+  .portrait img {
+    width: 100%;
+    display: block;
+    filter: grayscale(1) contrast(1.06);
+    border: 1px solid var(--line);
+  }
+  .portrait figcaption { margin-top: 0.8rem; }
+  @media (max-width: 860px) {
+    .story-split { grid-template-columns: 1fr; }
+    .portrait { max-width: 320px; }
+  }
 
   /* ---------- proof grid ---------- */
   .grid {
@@ -167,7 +186,7 @@
 <body>
 
 <header>
-  <a class="wordmark" href="#top">TAY&nbsp;PATTISON</a>
+  <a class="wordmark" href="#top">TY&nbsp;PATTISON</a>
   <nav class="mono">
     <a href="#story">Story</a>
     <a href="#work">Work</a>
@@ -179,7 +198,7 @@
 <main id="top">
 
   <div class="hero">
-    <svg id="monogram" viewBox="0 15 100 24" aria-label="TAY monogram in isometric cubes"></svg>
+    <svg id="monogram" viewBox="0 15 60 24" aria-label="TY monogram in isometric cubes"></svg>
     <h1>I find where AI can create real business value — and take it from a messy problem to a <em>working product.</em></h1>
     <div class="sub mono">
       <span>Product &times; Operations &times; AI</span>
@@ -189,10 +208,16 @@
 
   <section id="story">
     <span class="label mono">01 — The gap</span>
+    <div class="story-split">
     <div class="prose">
       <p>Companies know AI should change how they operate. Most don't know where it will create real value. <strong>That is the gap I work in.</strong></p>
       <p>I've spent more than a decade moving across operations, product, growth and startups — usually where the problem is messy and nobody quite owns it. AI has turned that range into a distinctive capability: I can understand a business, identify what is genuinely worth changing, and take it from an unclear opportunity to a working product or system.</p>
       <p class="dim">I don't just advise, and I don't just build. I work out what is worth building — and then make it real.</p>
+    </div>
+    <figure class="portrait">
+      <img src="ty.jpg" alt="Ty Pattison" loading="lazy">
+      <figcaption class="mono">Ty Pattison</figcaption>
+    </figure>
     </div>
   </section>
 
@@ -278,7 +303,7 @@
 
   <section class="quote">
     <span class="label mono">04 — When to call</span>
-    <h2>&ldquo;Tay is the person to call when we know AI could improve the business — <em>but we don't yet know where to begin, or what to build.</em>&rdquo;</h2>
+    <h2>&ldquo;Ty is the person to call when we know AI could improve the business — <em>but we don't yet know where to begin, or what to build.</em>&rdquo;</h2>
   </section>
 
 </main>
@@ -294,13 +319,13 @@
     <a href="https://life-time.co" target="_blank" rel="noopener">Life-Time.co</a>
   </div>
   <div class="colophon mono">
-    <span>&copy; 2026 Tay Pattison</span>
+    <span>&copy; 2026 Ty Pattison</span>
     <span>Clarity. Agency. Play.</span>
   </div>
 </footer>
 
 <script>
-/* TAY monogram: letterforms built from isometric cubes, matching the
+/* TY monogram: letterforms built from isometric cubes, matching the
    black-and-white cube reference. Each cube = 3 rhombic faces drawn
    in one flat tone with background-coloured seams. */
 (function () {
@@ -322,11 +347,9 @@
   // letters as [r, l, u] cube positions on the iso grid
   const LETTERS = [
     // T: stem of three, flat bar across the top
-    { at: 17, cubes: [[0,0,0],[0,0,1],[0,0,2],[1,-1,2],[-1,1,2]] },
-    // A: apex, shoulders, dropped feet
-    { at: 53, cubes: [[0,0,0],[1,0,0],[0,1,0],[2,0,-1],[0,2,-1]] },
+    { at: 15, cubes: [[0,0,0],[0,0,1],[0,0,2],[1,-1,2],[-1,1,2]] },
     // Y: junction + asymmetric arms, stem below
-    { at: 85.3, cubes: [[0,0,-1],[0,0,0],[0,1,1],[1,0,1],[2,0,2]] },
+    { at: 44.7, cubes: [[0,0,-1],[0,0,0],[0,1,1],[1,0,1],[2,0,2]] },
   ];
 
   const BASE = 32; // shared baseline
