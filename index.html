@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tay Pattison</title>
+<meta name="description" content="I find where AI can create real business value and take it from a messy problem to a working product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #141414;
+    --fg: #e8e7e2;
+    --dim: #8a8983;
+    --line: #2e2e2c;
+    --s: 6vw;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--fg); color: var(--bg); }
+
+  .mono {
+    font-family: "Space Mono", "Courier New", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* ---------- header ---------- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem var(--s);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+  header nav { display: flex; gap: 2rem; }
+  header nav a { transition: color .2s; color: var(--dim); }
+  header nav a:hover { color: var(--fg); }
+  .wordmark { font-weight: 700; letter-spacing: 0.02em; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding: clamp(4rem, 10vh, 8rem) var(--s) clamp(4rem, 9vh, 7rem);
+    border-bottom: 1px solid var(--line);
+  }
+  #monogram { width: clamp(220px, 34vw, 420px); margin-bottom: clamp(2.5rem, 6vh, 4.5rem); display: block; }
+  #monogram polygon { fill: var(--fg); stroke: var(--bg); stroke-width: 0.45; }
+  .hero h1 {
+    font-size: clamp(2rem, 5.4vw, 4.6rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  .hero h1 em { font-style: normal; color: var(--dim); }
+  .hero .sub {
+    margin-top: 2.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 2.4rem;
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(3.5rem, 9vh, 7rem) var(--s); border-bottom: 1px solid var(--line); }
+  .label { margin-bottom: 2.4rem; display: block; }
+  .prose {
+    font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+    font-weight: 400;
+    max-width: 56ch;
+    line-height: 1.55;
+  }
+  .prose p + p { margin-top: 1.4em; }
+  .prose strong { font-weight: 700; }
+  .prose .dim { color: var(--dim); }
+
+  /* ---------- proof grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .cell {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.6rem 1.4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-height: 11rem;
+    transition: background .25s;
+  }
+  a.cell:hover { background: #1c1c1a; }
+  .cell h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+  .cell p { color: var(--dim); font-size: 0.95rem; flex: 1; }
+  .cell .mono { font-size: 0.62rem; }
+
+  /* ---------- track record ---------- */
+  .roles { border-top: 1px solid var(--line); }
+  .role {
+    display: grid;
+    grid-template-columns: minmax(7rem, 12rem) 1fr minmax(6rem, 10rem);
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+    transition: color .2s;
+  }
+  .role .what { font-size: clamp(1.05rem, 1.6vw, 1.35rem); font-weight: 500; }
+  .role .what span { color: var(--dim); font-weight: 400; }
+  .role .when { text-align: right; }
+  a.role:hover .what span { color: var(--fg); }
+  @media (max-width: 640px) {
+    .role { grid-template-columns: 1fr; gap: 0.3rem; }
+    .role .when { text-align: left; }
+  }
+
+  /* ---------- pull quote ---------- */
+  .quote h2 {
+    font-size: clamp(1.7rem, 4.2vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 26ch;
+    text-wrap: balance;
+  }
+  .quote h2 em { font-style: normal; color: var(--dim); }
+
+  /* ---------- footer ---------- */
+  footer { padding: clamp(3.5rem, 9vh, 6rem) var(--s) 2.5rem; }
+  footer .big a {
+    font-size: clamp(1.8rem, 4.6vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    border-bottom: 2px solid var(--line);
+    transition: border-color .25s;
+  }
+  footer .big a:hover { border-color: var(--fg); }
+  .footlinks {
+    margin-top: 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 2.2rem;
+  }
+  .footlinks a { color: var(--dim); transition: color .2s; }
+  .footlinks a:hover { color: var(--fg); }
+  .colophon { margin-top: 3rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="#top">TAY&nbsp;PATTISON</a>
+  <nav class="mono">
+    <a href="#story">Story</a>
+    <a href="#work">Work</a>
+    <a href="#track">Track&nbsp;record</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <svg id="monogram" viewBox="0 15 100 24" aria-label="TAY monogram in isometric cubes"></svg>
+    <h1>I find where AI can create real business value — and take it from a messy problem to a <em>working product.</em></h1>
+    <div class="sub mono">
+      <span>Product &times; Operations &times; AI</span>
+      <span>London / Remote / Global</span>
+    </div>
+  </div>
+
+  <section id="story">
+    <span class="label mono">01 — The gap</span>
+    <div class="prose">
+      <p>Companies know AI should change how they operate. Most don't know where it will create real value. <strong>That is the gap I work in.</strong></p>
+      <p>I've spent more than a decade moving across operations, product, growth and startups — usually where the problem is messy and nobody quite owns it. AI has turned that range into a distinctive capability: I can understand a business, identify what is genuinely worth changing, and take it from an unclear opportunity to a working product or system.</p>
+      <p class="dim">I don't just advise, and I don't just build. I work out what is worth building — and then make it real.</p>
+    </div>
+  </section>
+
+  <section id="work">
+    <span class="label mono">02 — Proof, not promises</span>
+    <div class="prose" style="margin-bottom: 2.6rem;">
+      <p>Through <strong>10,000 Ideas</strong>, an open-source venture studio, I ship working products at a pace most teams reserve for slide decks. A selection:</p>
+    </div>
+    <div class="grid">
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Visa Copilot</h3>
+        <p>Navigating visa processes without the guesswork.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Cringe Club</h3>
+        <p>Social play, engineered for actual fun.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Rise and Shine</h3>
+        <p>Seed your day with intention.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Residency Radar</h3>
+        <p>Tracking residency options, made legible.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Animates</h3>
+        <p>Your furever family's personal health assistant.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Joyjar</h3>
+        <p>A jar for the happy thoughts.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">Shipped</span>
+        <h3>Complaints Box</h3>
+        <p>Feedback that goes somewhere.</p>
+      </a>
+      <a class="cell" href="https://www.10000.fyi/" target="_blank" rel="noopener">
+        <span class="mono">The studio</span>
+        <h3>10000.fyi &rarr;</h3>
+        <p>All of it — the full open-source venture studio.</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="track">
+    <span class="label mono">03 — Track record</span>
+    <div class="roles">
+      <a class="role" href="https://life-time.co" target="_blank" rel="noopener">
+        <span class="mono">Co-Founder</span>
+        <span class="what">Life-Time.co <span>— time is humanity's most precious asset</span></span>
+        <span class="mono when">2026 — now</span>
+      </a>
+      <a class="role" href="https://futurecast.fm" target="_blank" rel="noopener">
+        <span class="mono">Host</span>
+        <span class="what">FutureCast.fm <span>— conversations on where the future is heading</span></span>
+        <span class="mono when">2026 — now</span>
+      </a>
+      <a class="role" href="https://myosin.xyz" target="_blank" rel="noopener">
+        <span class="mono">Innovation Lead</span>
+        <span class="what">Myosin.xyz <span>— built DAO ops, ran web3 client projects for protocols</span></span>
+        <span class="mono when">2024 — now</span>
+      </a>
+      <div class="role">
+        <span class="mono">Commercial Ops Director</span>
+        <span class="what">Newfound <span>— brought structure to a scaling business</span></span>
+        <span class="mono when">2022 — 23</span>
+      </div>
+      <div class="role">
+        <span class="mono">Before that</span>
+        <span class="what"><span>A decade across operations, product, growth and startups — 14 roles' worth of messy problems.</span></span>
+        <span class="mono when">2012 — 22</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote">
+    <span class="label mono">04 — When to call</span>
+    <h2>&ldquo;Tay is the person to call when we know AI could improve the business — <em>but we don't yet know where to begin, or what to build.</em>&rdquo;</h2>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <span class="label mono">05 — Contact</span>
+  <p class="big"><a href="mailto:taytoddpattison@gmail.com">taytoddpattison@gmail.com</a></p>
+  <div class="footlinks mono">
+    <a href="https://www.linkedin.com/in/taypattison/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/upperspacecase" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.10000.fyi/" target="_blank" rel="noopener">10000.fyi</a>
+    <a href="https://futurecast.fm" target="_blank" rel="noopener">FutureCast.fm</a>
+    <a href="https://life-time.co" target="_blank" rel="noopener">Life-Time.co</a>
+  </div>
+  <div class="colophon mono">
+    <span>&copy; 2026 Tay Pattison</span>
+    <span>Clarity. Agency. Play.</span>
+  </div>
+</footer>
+
+<script>
+/* TAY monogram: letterforms built from isometric cubes, matching the
+   black-and-white cube reference. Each cube = 3 rhombic faces drawn
+   in one flat tone with background-coloured seams. */
+(function () {
+  const svg = document.getElementById("monogram");
+  const S = 5;                                  // cube edge (screen units)
+  const RX = S * Math.sqrt(3) / 2, RY = S / 2;  // iso axis projection
+
+  // iso step -> screen offset: r = toward front-right, l = front-left, u = up
+  const pos = (r, l, u) => [(r - l) * RX, (r + l) * RY - u * S];
+
+  // the three visible faces of a cube centred on (cx, cy)
+  function faces(cx, cy) {
+    const N  = [cx, cy - S],      M  = [cx, cy],      B = [cx, cy + S];
+    const NE = [cx + RX, cy - RY], SE = [cx + RX, cy + RY];
+    const NW = [cx - RX, cy - RY], SW = [cx - RX, cy + RY];
+    return [[N, NE, M, NW], [NW, M, B, SW], [M, NE, SE, B]];
+  }
+
+  // letters as [r, l, u] cube positions on the iso grid
+  const LETTERS = [
+    // T: stem of three, flat bar across the top
+    { at: 17, cubes: [[0,0,0],[0,0,1],[0,0,2],[1,-1,2],[-1,1,2]] },
+    // A: apex, shoulders, dropped feet
+    { at: 53, cubes: [[0,0,0],[1,0,0],[0,1,0],[2,0,-1],[0,2,-1]] },
+    // Y: junction + asymmetric arms, stem below
+    { at: 85.3, cubes: [[0,0,-1],[0,0,0],[0,1,1],[1,0,1],[2,0,2]] },
+  ];
+
+  const BASE = 32; // shared baseline
+  let frag = "";
+  for (const { at, cubes } of LETTERS) {
+    // paint back-to-front: lower, deeper cubes first
+    const ordered = [...cubes].sort((a, b) => (a[0]+a[1]+a[2]) - (b[0]+b[1]+b[2]));
+    // letter baseline: align lowest cube bottoms
+    const maxY = Math.max(...cubes.map(c => pos(...c)[1]));
+    for (const c of ordered) {
+      const [x, y] = pos(...c);
+      for (const f of faces(at + x, BASE - maxY + y)) {
+        frag += '<polygon points="' + f.map(p => p[0].toFixed(2) + "," + p[1].toFixed(2)).join(" ") + '"/>';
+      }
+    }
+  }
+  svg.innerHTML = frag;
+})();
+</script>
+
+</body>
+</html>
