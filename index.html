@@ -105,6 +105,14 @@
   .prose strong { font-weight: 700; }
   .prose .dim { color: var(--dim); }
 
+  .sec-title {
+    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.6rem;
+  }
+  .sec-title .cubemark { width: 0.9em; height: 0.9em; vertical-align: -0.08em; margin-right: 0.45em; }
+
   /* ---------- cube cards ---------- */
   .cubegrid {
     display: grid;
@@ -203,14 +211,6 @@
     transition: border-color .25s;
   }
   footer .big a:hover { border-color: var(--fg); }
-  .footlinks {
-    margin-top: 3.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem 2.2rem;
-  }
-  .footlinks a { color: var(--dim); transition: color .2s; }
-  .footlinks a:hover { color: var(--fg); }
   .colophon { margin-top: 3rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
 </style>
 </head>
@@ -244,13 +244,14 @@
   </section>
 
   <section id="work">
+    <h2 class="sec-title"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>Selected work</h2>
     <div class="prose" style="margin-bottom: 1rem;">
-      <p>Selected work, chosen for how finished it is and how directly it shows AI creating value. Turn a cube to read it. Click through to visit.</p>
+      <p>Chosen for how finished it is and how directly it shows AI creating value. Turn a cube to read it. Click through to visit.</p>
     </div>
     <div class="cubegrid">
       <a class="cube-card" href="https://beforemarket.club/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/beforemarket.jpg" alt="Before Market" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/beforemarket.jpg" alt="Before Market"></span>
           <span class="face f-right">
             <span class="side-status mono">Live</span>
             <span class="side-desc">Members first. See it live at beforemarket.club.</span>
@@ -265,7 +266,7 @@
       </a>
       <a class="cube-card" href="https://www.landlibrary.co/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/landlibrary.jpg" alt="Land Library" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/landlibrary.jpg" alt="Land Library"></span>
           <span class="face f-right">
             <span class="side-status mono">Pilot</span>
             <span class="side-desc">Turns maps, records, and local knowledge into clear, practical guidance for landowners and rural regions.</span>
@@ -280,7 +281,7 @@
       </a>
       <a class="cube-card" href="https://thelongview.org/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/longview.jpg" alt="The Long View" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/longview.jpg" alt="The Long View"></span>
           <span class="face f-right">
             <span class="side-status mono">Live</span>
             <span class="side-desc">A fully automated daily briefing that ranks the news by historical significance. No human editorial queue.</span>
@@ -295,7 +296,7 @@
       </a>
       <a class="cube-card" href="https://flashco.org/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/flashco.jpg" alt="Flash Co" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/flashco.jpg" alt="Flash Co"></span>
           <span class="face f-right">
             <span class="side-status mono">Live</span>
             <span class="side-desc">A 48-hour structured ideation process that maps a small group's skills and networks into an idea worth starting.</span>
@@ -310,7 +311,7 @@
       </a>
       <a class="cube-card" href="https://nudgeinvoicing.pro/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/nudge.jpg" alt="Nudge Invoicing" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/nudge.jpg" alt="Nudge Invoicing"></span>
           <span class="face f-right">
             <span class="side-status mono">Live</span>
             <span class="side-desc">An invoicing assistant that sends the invoice, knows when it is due, and nudges your client until the money lands.</span>
@@ -325,7 +326,7 @@
       </a>
       <a class="cube-card" href="https://nature-club.co/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/natureclub.jpg" alt="Natureclub" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/natureclub.jpg" alt="Natureclub"></span>
           <span class="face f-right">
             <span class="side-status mono">Live</span>
             <span class="side-desc">Nature-based classes and experiences you can discover and book in the outdoors.</span>
@@ -339,11 +340,11 @@
         <span class="cube-desc">Nature-based classes and experiences you can discover and book in the outdoors.</span>
       </a>
     </div>
-    <span class="label mono sublabel"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>Podcasts</span>
+    <h2 class="sec-title"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>Podcasts</h2>
     <div class="cubegrid">
       <a class="cube-card" href="https://www.futurecast.fm/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/futurecast.jpg" alt="FutureCast" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/futurecast.jpg" alt="FutureCast"></span>
           <span class="face f-right">
             <span class="side-status mono">Podcast</span>
             <span class="side-desc">About the futures we're building, the ones worth fighting for, and your role in making them real.</span>
@@ -358,7 +359,7 @@
       </a>
       <a class="cube-card" href="https://thegreatspinup.life-time.co/" target="_blank" rel="noopener">
         <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/greatspinup.jpg" alt="The Great Spin Up" loading="lazy"></span>
+          <span class="face f-front"><img src="thumbs/greatspinup.jpg" alt="The Great Spin Up"></span>
           <span class="face f-right">
             <span class="side-status mono">Podcast</span>
             <span class="side-desc">Practical conversations about building with AI towards an abundant future.</span>
@@ -378,13 +379,7 @@
 </main>
 
 <footer id="contact">
-  <p class="big"><a href="mailto:taytoddpattison@gmail.com">taytoddpattison@gmail.com</a></p>
-  <div class="footlinks mono">
-    <a href="https://www.linkedin.com/in/taypattison/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.10000.fyi/" target="_blank" rel="noopener">10000.fyi</a>
-    <a href="https://futurecast.fm" target="_blank" rel="noopener">FutureCast.fm</a>
-    <a href="https://life-time.co" target="_blank" rel="noopener">Life-Time.co</a>
-  </div>
+  <p class="big"><a href="mailto:ty@life-time.co">ty@life-time.co</a></p>
   <div class="colophon mono">
     <span>&copy; 2026 Ty Pattison</span>
     <span>Clarity. Agency. Play.</span>
