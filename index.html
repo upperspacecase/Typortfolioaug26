@@ -80,7 +80,6 @@
     border-bottom: 1px solid var(--line);
   }
   .cubeart polygon { fill: var(--fg); stroke: var(--bg); stroke-width: 0.45; }
-  .cubes { width: clamp(110px, 14vw, 170px); margin-bottom: clamp(2.5rem, 6vh, 4rem); display: block; }
   .cubemark { width: 1.5em; height: 1.5em; vertical-align: -0.4em; margin-right: 0.7em; display: inline-block; }
   .hero h1 {
     font-size: clamp(2rem, 5.4vw, 4.6rem);
@@ -231,7 +230,6 @@
 <main id="top">
 
   <div class="hero">
-    <svg class="cubeart cubes" data-cubes="hero" aria-hidden="true"></svg>
     <h1>People call me when they know AI could improve their business, <em>but they don't yet know where to begin or what to build.</em></h1>
   </div>
 
@@ -398,7 +396,6 @@
   }
 
   const SETS = {
-    hero: [[0,1,0],[0,0,0],[1,0,0],[1,1,0],[0,0,1],[1,0,1],[2,-1,2]],
     mark: [[0,1,0],[1,0,0],[0,0,1]],
   };
 
