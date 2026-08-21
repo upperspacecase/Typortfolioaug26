@@ -91,12 +91,6 @@
     text-wrap: balance;
   }
   .hero h1 em { font-style: normal; color: var(--dim); }
-  .hero .sub {
-    margin-top: 2.2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 2.4rem;
-  }
 
   /* ---------- sections ---------- */
   section { padding: clamp(3.5rem, 9vh, 7rem) var(--s); border-bottom: 1px solid var(--line); }
@@ -199,37 +193,6 @@
   .cell p { color: var(--dim); font-size: 0.95rem; flex: 1; }
   .cell .mono { font-size: 0.62rem; }
 
-  /* ---------- track record ---------- */
-  .roles { border-top: 1px solid var(--line); }
-  .role {
-    display: grid;
-    grid-template-columns: minmax(7rem, 12rem) 1fr minmax(6rem, 10rem);
-    gap: 1.5rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--line);
-    align-items: baseline;
-    transition: color .2s;
-  }
-  .role .what { font-size: clamp(1.05rem, 1.6vw, 1.35rem); font-weight: 500; }
-  .role .what span { color: var(--dim); font-weight: 400; }
-  .role .when { text-align: right; }
-  a.role:hover .what span { color: var(--fg); }
-  @media (max-width: 640px) {
-    .role { grid-template-columns: 1fr; gap: 0.3rem; }
-    .role .when { text-align: left; }
-  }
-
-  /* ---------- pull quote ---------- */
-  .quote h2 {
-    font-size: clamp(1.7rem, 4.2vw, 3.4rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    max-width: 26ch;
-    text-wrap: balance;
-  }
-  .quote h2 em { font-style: normal; color: var(--dim); }
-
   /* ---------- footer ---------- */
   footer { padding: clamp(3.5rem, 9vh, 6rem) var(--s) 2.5rem; }
   footer .big a {
@@ -258,7 +221,6 @@
   <nav class="mono">
     <a href="#story">Story</a>
     <a href="#work">Work</a>
-    <a href="#track">Track&nbsp;record</a>
     <a href="#contact">Contact</a>
   </nav>
   <button class="burger" aria-label="Menu" aria-expanded="false">
@@ -270,15 +232,10 @@
 
   <div class="hero">
     <svg class="cubeart cubes" data-cubes="hero" aria-hidden="true"></svg>
-    <h1>I find where AI can create real business value and take it from a messy problem to a <em>working product.</em></h1>
-    <div class="sub mono">
-      <span>Product &times; Operations &times; AI</span>
-      <span>London / Remote / Global</span>
-    </div>
+    <h1>People call me when they know AI could improve their business, <em>but they don't yet know where to begin or what to build.</em></h1>
   </div>
 
   <section id="story">
-    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>01 · The gap</span>
     <div class="prose">
       <p>Companies know AI should change how they operate. Most don't know where it will create real value. <strong>That is the gap I work in.</strong></p>
       <p>I've spent more than a decade moving across operations, product, growth and startups, usually where the problem is messy and nobody quite owns it. AI has turned that range into a distinctive capability: I can understand a business, identify what is genuinely worth changing, and take it from an unclear opportunity to a working product or system.</p>
@@ -287,7 +244,6 @@
   </section>
 
   <section id="work">
-    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>02 · Proof, not promises</span>
     <div class="prose" style="margin-bottom: 1rem;">
       <p>Selected work, chosen for how finished it is and how directly it shows AI creating value. Turn a cube to read it. Click through to visit.</p>
     </div>
@@ -419,46 +375,9 @@
     <p class="studio-line">Everything else lives at <a href="https://www.10000.fyi/" target="_blank" rel="noopener">10000.fyi</a>, the open-source venture studio.</p>
   </section>
 
-  <section id="track">
-    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>03 · Track record</span>
-    <div class="roles">
-      <a class="role" href="https://life-time.co" target="_blank" rel="noopener">
-        <span class="mono">Co-Founder</span>
-        <span class="what">Life-Time.co <span>· time is humanity's most precious asset</span></span>
-        <span class="mono when">since 2026</span>
-      </a>
-      <a class="role" href="https://futurecast.fm" target="_blank" rel="noopener">
-        <span class="mono">Host</span>
-        <span class="what">FutureCast.fm <span>· conversations on where the future is heading</span></span>
-        <span class="mono when">since 2026</span>
-      </a>
-      <a class="role" href="https://myosin.xyz" target="_blank" rel="noopener">
-        <span class="mono">Innovation Lead</span>
-        <span class="what">Myosin.xyz <span>· built DAO ops, ran web3 client projects for protocols</span></span>
-        <span class="mono when">since 2024</span>
-      </a>
-      <div class="role">
-        <span class="mono">Commercial Ops Director</span>
-        <span class="what">Newfound <span>· brought structure to a scaling business</span></span>
-        <span class="mono when">2022 to 2023</span>
-      </div>
-      <div class="role">
-        <span class="mono">Before that</span>
-        <span class="what"><span>A decade across operations, product, growth and startups: 14 roles' worth of messy problems.</span></span>
-        <span class="mono when">2012 to 2022</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="quote">
-    <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>04 · When to call</span>
-    <h2>&ldquo;Ty is the person to call when we know AI could improve the business, <em>but we don't yet know where to begin or what to build.</em>&rdquo;</h2>
-  </section>
-
 </main>
 
 <footer id="contact">
-  <span class="label mono"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>05 · Contact</span>
   <p class="big"><a href="mailto:taytoddpattison@gmail.com">taytoddpattison@gmail.com</a></p>
   <div class="footlinks mono">
     <a href="https://www.linkedin.com/in/taypattison/" target="_blank" rel="noopener">LinkedIn</a>
