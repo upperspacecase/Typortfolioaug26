@@ -2,437 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ty Pattison</title>
-<meta name="description" content="I find where AI can create real business value and take it from a messy problem to a working product.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="description" content="Helping good businesses find their next owners. Making space for rites of passage, mentors and real conversations.">
+<meta name="theme-color" content="#a6e0f8">
+<meta property="og:title" content="Ty Pattison">
+<meta property="og:description" content="Helping good businesses find their next owners. Making space for rites of passage, mentors and real conversations.">
+<meta property="og:image" content="https://ty.life-time.co/surfboard.jpg">
+<link rel="preload" href="outfit-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="surfboard.jpg" as="image" media="(max-aspect-ratio: 9/16)">
+<link rel="preload" href="surfboard-wide.jpg" as="image" media="(min-aspect-ratio: 9/16)">
 <style>
-  :root {
-    --bg: #141414;
-    --fg: #e8e7e2;
-    --dim: #8a8983;
-    --line: #2e2e2c;
-    --s: 6vw;
+  @font-face {
+    font-family: "Outfit";
+    src: url("outfit-300.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
   }
+
+  /* The photo is 720 x 1280 (surfboard-wide.jpg is the same photo with its
+     background carried out sideways to 2880 x 1280 for wider screens).
+     --u is one photo pixel when the photo fills the screen height; --t is the
+     type scale, which follows the photo until the screen is narrower than the
+     photo, then follows the screen width. */
+  :root {
+    --ink: #0f2361;
+    --u: calc(100vh / 1280);
+    --t: min(var(--u), calc(100vw / 720));
+  }
+  @supports (height: 100dvh) {
+    :root { --u: calc(100dvh / 1280); }
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html, body { height: 100%; overflow: hidden; }
   body {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.45;
+    background: #d9e6ee;
+    color: var(--ink);
+    font-family: "Outfit", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
   }
   a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--fg); color: var(--bg); }
 
-  .mono {
-    font-family: "Space Mono", "Courier New", monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--dim);
-  }
-
-  /* ---------- header ---------- */
-  header {
+  /* ---------- backdrop: photo, centred, with its edge colours filling anything wider ---------- */
+  .backdrop {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem var(--s);
-    border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
-    z-index: 10;
+    justify-content: center;
   }
-  header nav { display: flex; gap: 2rem; }
-  header nav a { transition: color .2s; color: var(--dim); }
-  header nav a:hover { color: var(--fg); }
-  .wordmark { font-weight: 700; letter-spacing: 0.02em; }
-  .burger { display: none; background: none; border: 0; cursor: pointer; padding: 0.4rem 0; }
-  .burger span { display: block; width: 22px; height: 2px; background: var(--fg); margin: 5px 0; transition: transform .25s, opacity .25s; }
-  body.menu-open .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  body.menu-open .burger span:nth-child(2) { opacity: 0; }
-  body.menu-open .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  @media (max-width: 720px) {
-    header nav {
-      display: none;
-      position: absolute;
-      top: 100%; left: 0; right: 0;
-      flex-direction: column;
-      gap: 0;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-      padding: 0.4rem var(--s) 1.2rem;
-    }
-    header nav a { padding: 1rem 0; border-top: 1px solid var(--line); font-size: 0.8rem; }
-    body.menu-open header nav { display: flex; }
-    .burger { display: block; }
-  }
-
-  /* ---------- hero ---------- */
-  .hero {
-    padding: clamp(4rem, 10vh, 8rem) var(--s) clamp(4rem, 9vh, 7rem);
-    border-bottom: 1px solid var(--line);
-  }
-  .cubeart polygon { fill: var(--fg); stroke: var(--bg); stroke-width: 0.45; }
-  .cubemark { width: 1.5em; height: 1.5em; vertical-align: -0.4em; margin-right: 0.7em; display: inline-block; }
-  .hero h1 {
-    font-size: clamp(2rem, 5.4vw, 4.6rem);
-    font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    max-width: 20ch;
-    text-wrap: balance;
-  }
-  .hero h1 em { font-style: normal; color: var(--dim); }
-
-  /* ---------- sections ---------- */
-  section { padding: clamp(3.5rem, 9vh, 7rem) var(--s); border-bottom: 1px solid var(--line); }
-  .label { margin-bottom: 2.4rem; display: block; }
-  .prose {
-    font-size: clamp(1.15rem, 1.9vw, 1.55rem);
-    font-weight: 400;
-    max-width: 56ch;
-    line-height: 1.55;
-  }
-  .prose p + p { margin-top: 1.4em; }
-  .prose strong { font-weight: 700; }
-  .prose .dim { color: var(--dim); }
-
-  .sec-title {
-    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.6rem;
-  }
-  .sec-title .cubemark { width: 0.9em; height: 0.9em; vertical-align: -0.08em; margin-right: 0.45em; }
-
-  /* ---------- cube cards ---------- */
-  .cubegrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 3rem 2rem;
-    margin: 3rem 0 4rem;
-  }
-  .cube-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.45rem;
-    padding-top: 1.5rem;
-  }
-  .scene {
-    --cs: 185px;
-    width: var(--cs); height: var(--cs);
-    perspective: 1100px;
+  .backdrop img {
+    flex: none;
+    height: 100%;
+    width: calc(720 * var(--u));
     display: block;
-    margin-bottom: 2.4rem;
   }
-  .cube3d {
-    position: relative;
-    width: 100%; height: 100%;
-    display: block;
-    transform-style: preserve-3d;
-    transform: rotateX(-18deg) rotateY(-28deg);
-    transition: transform .8s cubic-bezier(.22, .9, .24, 1);
+  @media (min-aspect-ratio: 9/16) {
+    .backdrop img { width: calc(2880 * var(--u)); }
   }
-  .cube-card:hover .cube3d, .cube-card:focus-visible .cube3d { transform: rotateX(-8deg) rotateY(-99deg); }
-  .face {
-    position: absolute; inset: 0;
-    background: var(--fg);
-    border: 1px solid #22221f;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-  .f-front  { transform: translateZ(calc(var(--cs) / 2)); }
-  .f-right  { transform: rotateY(90deg) translateZ(calc(var(--cs) / 2)); }
-  .f-top    { transform: rotateX(90deg) translateZ(calc(var(--cs) / 2)) rotate(180deg); }
-  .f-back   { transform: rotateY(180deg) translateZ(calc(var(--cs) / 2)); }
-  .f-left   { transform: rotateY(-90deg) translateZ(calc(var(--cs) / 2)); }
-  .f-bottom { transform: rotateX(-90deg) translateZ(calc(var(--cs) / 2)); }
-  .f-front img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .f-right {
-    align-items: flex-start; justify-content: space-between;
-    text-align: left;
-    padding: 1rem;
-    color: #141414;
-  }
-  .side-desc { font-size: 0.82rem; line-height: 1.4; font-weight: 500; }
-  .side-status { color: #77766f; }
-  .side-visit { color: #141414; }
-  .f-top .top-label { color: #77766f; }
-  .cube-card h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; }
-  .cube-domain { font-size: 0.62rem; }
-  .cube-desc { display: none; color: var(--dim); font-size: 0.88rem; max-width: 32ch; margin-top: 0.3rem; }
-  @media (hover: none) { .cube-desc { display: block; } }
-  @media (prefers-reduced-motion: reduce) { .cube3d { transition: none; } }
-  .sublabel { margin-top: 1rem; }
-  .studio-line { color: var(--dim); }
-  .studio-line a { border-bottom: 1px solid var(--line); transition: border-color .2s; }
-  .studio-line a:hover { border-color: var(--fg); }
+  .edge { flex: 1 0 0; background-size: 100% 100%; background-repeat: no-repeat; }
+  .edge.l { background-image: url("edge-l.png"); margin-right: -1px; }
+  .edge.r { background-image: url("edge-r.png"); margin-left: -1px; }
 
-  /* ---------- proof grid ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
+  /* ---------- copy ---------- */
+  .copy {
+    position: fixed;
+    top: calc(96 * var(--t));
+    left: calc(50% - 303 * var(--t));
+    white-space: nowrap;
   }
-  .cell {
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 1.6rem 1.4rem 2rem;
+  h1 {
+    font-size: calc(80 * var(--t));
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    margin-top: calc(40 * var(--t));
+    font-size: calc(27 * var(--t));
+    line-height: 1.24;
+  }
+  nav {
+    margin-top: calc(48 * var(--t));
     display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    min-height: 11rem;
-    transition: background .25s;
+    align-items: center;
+    gap: calc(32 * var(--t));
+    font-size: calc(27 * var(--t));
+    line-height: 1;
   }
-  a.cell:hover { background: #1c1c1a; }
-  .cell h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
-  .cell p { color: var(--dim); font-size: 0.95rem; flex: 1; }
-  .cell .mono { font-size: 0.62rem; }
+  nav a {
+    padding: calc(14 * var(--t)) 0;
+    margin: calc(-14 * var(--t)) 0;
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 calc(100% - 10 * var(--t)) / 0 1px;
+    transition: background-size .25s ease;
+  }
+  nav a:hover, nav a:focus-visible { background-size: 100% 1px; }
+  nav a:focus-visible { outline: 1px solid currentColor; outline-offset: calc(6 * var(--t)); }
+  nav a.in { background: none; display: flex; transition: opacity .2s; }
+  nav a.in:hover { opacity: .65; }
+  nav svg { height: calc(25 * var(--t)); width: auto; fill: currentColor; display: block; }
 
-  /* ---------- footer ---------- */
-  footer { padding: clamp(3.5rem, 9vh, 6rem) var(--s) 2.5rem; }
-  footer .big a {
-    font-size: clamp(1.8rem, 4.6vw, 3.6rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    border-bottom: 2px solid var(--line);
-    transition: border-color .25s;
+  /* ---------- short, wide screens (a phone on its side): copy left, board right ---------- */
+  @media (orientation: landscape) and (max-height: 520px) {
+    :root { --t: calc(100vh / 620); }
+    .backdrop { justify-content: flex-end; }
+    .backdrop img { margin-right: calc(25vw - 1440 * var(--u)); }
+    .edge.r { display: none; }
+    .copy { top: 50%; left: 6vw; transform: translateY(-50%); }
   }
-  footer .big a:hover { border-color: var(--fg); }
-  .colophon { margin-top: 3rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
 </style>
 </head>
 <body>
 
-<header>
-  <a class="wordmark" href="#top">TY&nbsp;PATTISON</a>
-  <nav class="mono">
-    <a href="#story">Story</a>
-    <a href="#work">Work</a>
-    <a href="#contact">Contact</a>
+<div class="backdrop" aria-hidden="true">
+  <div class="edge l"></div>
+  <picture>
+    <source media="(min-aspect-ratio: 9/16)" srcset="surfboard-wide.jpg">
+    <img src="surfboard.jpg" alt="">
+  </picture>
+  <div class="edge r"></div>
+</div>
+
+<main class="copy">
+  <h1>ty pattison</h1>
+  <p class="lede">helping good businesses find their next owners.<br>making space for rites of passage,<br>mentors and real conversations.</p>
+  <nav aria-label="Links">
+    <a class="in" href="https://www.linkedin.com/in/taypattison" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 448 448" aria-hidden="true"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+    </a>
+    <a href="https://beforemarket.club" target="_blank" rel="noopener">before market club</a>
+    <a href="https://spacious.live" target="_blank" rel="noopener">spacious</a>
+    <a href="https://x.com/taytodde/articles" target="_blank" rel="noopener">writing</a>
   </nav>
-  <button class="burger" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</header>
-
-<main id="top">
-
-  <div class="hero">
-    <h1>People call me when they know AI could improve their business, <em>but they don't yet know where to begin or what to build.</em></h1>
-  </div>
-
-  <section id="story">
-    <div class="prose">
-      <p>Companies know AI should change how they operate. Most don't know where it will create real value. <strong>That is the gap I work in.</strong></p>
-      <p>I've spent more than a decade moving across operations, product, growth and startups, usually where the problem is messy and nobody quite owns it. AI has turned that range into a distinctive capability: I can understand a business, identify what is genuinely worth changing, and take it from an unclear opportunity to a working product or system.</p>
-      <p class="dim">I don't just advise, and I don't just build. I work out what is worth building, then make it real.</p>
-    </div>
-  </section>
-
-  <section id="work">
-    <h2 class="sec-title"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>Selected work</h2>
-    <div class="cubegrid">
-      <a class="cube-card" href="https://beforemarket.club/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/beforemarket.jpg" alt="Before Market"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Live</span>
-            <span class="side-desc">Members first. See it live at beforemarket.club.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">beforemarket.club</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>Before Market</h3>
-        <span class="mono cube-domain">beforemarket.club</span>
-        <span class="cube-desc">Members first. See it live at beforemarket.club.</span>
-      </a>
-      <a class="cube-card" href="https://www.landlibrary.co/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/landlibrary.jpg" alt="Land Library"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Pilot</span>
-            <span class="side-desc">Turns maps, records, and local knowledge into clear, practical guidance for landowners and rural regions.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">landlibrary.co</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>Land Library</h3>
-        <span class="mono cube-domain">landlibrary.co</span>
-        <span class="cube-desc">Turns maps, records, and local knowledge into clear, practical guidance for landowners and rural regions.</span>
-      </a>
-      <a class="cube-card" href="https://thelongview.org/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/longview.jpg" alt="The Long View"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Live</span>
-            <span class="side-desc">A fully automated daily briefing that ranks the news by historical significance. No human editorial queue.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">thelongview.org</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>The Long View</h3>
-        <span class="mono cube-domain">thelongview.org</span>
-        <span class="cube-desc">A fully automated daily briefing that ranks the news by historical significance. No human editorial queue.</span>
-      </a>
-      <a class="cube-card" href="https://flashco.org/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/flashco.jpg" alt="Flash Co"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Live</span>
-            <span class="side-desc">A 48-hour structured ideation process that maps a small group's skills and networks into an idea worth starting.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">flashco.org</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>Flash Co</h3>
-        <span class="mono cube-domain">flashco.org</span>
-        <span class="cube-desc">A 48-hour structured ideation process that maps a small group's skills and networks into an idea worth starting.</span>
-      </a>
-      <a class="cube-card" href="https://nudgeinvoicing.pro/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/nudge.jpg" alt="Nudge Invoicing"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Live</span>
-            <span class="side-desc">An invoicing assistant that sends the invoice, knows when it is due, and nudges your client until the money lands.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">nudgeinvoicing.pro</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>Nudge Invoicing</h3>
-        <span class="mono cube-domain">nudgeinvoicing.pro</span>
-        <span class="cube-desc">An invoicing assistant that sends the invoice, knows when it is due, and nudges your client until the money lands.</span>
-      </a>
-      <a class="cube-card" href="https://nature-club.co/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/natureclub.jpg" alt="Natureclub"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Live</span>
-            <span class="side-desc">Nature-based classes and experiences you can discover and book in the outdoors.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">nature-club.co</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>Natureclub</h3>
-        <span class="mono cube-domain">nature-club.co</span>
-        <span class="cube-desc">Nature-based classes and experiences you can discover and book in the outdoors.</span>
-      </a>
-    </div>
-    <h2 class="sec-title"><svg class="cubeart cubemark" data-cubes="mark" aria-hidden="true"></svg>Podcasts</h2>
-    <div class="cubegrid">
-      <a class="cube-card" href="https://www.futurecast.fm/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/futurecast.jpg" alt="FutureCast"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Podcast</span>
-            <span class="side-desc">About the futures we're building, the ones worth fighting for, and your role in making them real.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">futurecast.fm</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>FutureCast</h3>
-        <span class="mono cube-domain">futurecast.fm</span>
-        <span class="cube-desc">About the futures we're building, the ones worth fighting for, and your role in making them real.</span>
-      </a>
-      <a class="cube-card" href="https://thegreatspinup.life-time.co/" target="_blank" rel="noopener">
-        <span class="scene"><span class="cube3d">
-          <span class="face f-front"><img src="thumbs/greatspinup.jpg" alt="The Great Spin Up"></span>
-          <span class="face f-right">
-            <span class="side-status mono">Podcast</span>
-            <span class="side-desc">Practical conversations about building with AI towards an abundant future.</span>
-            <span class="side-visit mono">Visit &#8599;</span>
-          </span>
-          <span class="face f-top"><span class="mono top-label">thegreatspinup.life-time.co</span></span>
-          <span class="face f-left"></span><span class="face f-back"></span><span class="face f-bottom"></span>
-        </span></span>
-        <h3>The Great Spin Up</h3>
-        <span class="mono cube-domain">thegreatspinup.life-time.co</span>
-        <span class="cube-desc">Practical conversations about building with AI towards an abundant future.</span>
-      </a>
-    </div>
-    <p class="studio-line">Everything else lives at <a href="https://www.10000.fyi/" target="_blank" rel="noopener">10000.fyi</a>, the open-source venture studio.</p>
-  </section>
-
 </main>
-
-<footer id="contact">
-  <p class="big"><a href="mailto:ty@life-time.co">ty@life-time.co</a></p>
-  <div class="colophon mono">
-    <span>&copy; 2026 Ty Pattison</span>
-    <span>Clarity. Agency. Play.</span>
-  </div>
-</footer>
-
-<script>
-/* Isometric cube elements: the studio's visual language, used as accents. */
-(function () {
-  const S = 5;
-  const RX = S * Math.sqrt(3) / 2, RY = S / 2;
-  const pos = (r, l, u) => [(r - l) * RX, (r + l) * RY - u * S];
-
-  function faces(cx, cy) {
-    const N = [cx, cy - S], M = [cx, cy], B = [cx, cy + S];
-    const NE = [cx + RX, cy - RY], SE = [cx + RX, cy + RY];
-    const NW = [cx - RX, cy - RY], SW = [cx - RX, cy + RY];
-    return [[N, NE, M, NW], [NW, M, B, SW], [M, NE, SE, B]];
-  }
-
-  const SETS = {
-    mark: [[0,1,0],[1,0,0],[0,0,1]],
-  };
-
-  document.querySelectorAll("svg[data-cubes]").forEach((svg) => {
-    const cubes = SETS[svg.dataset.cubes] || SETS.mark;
-    const pts = cubes.map((c) => pos(...c));
-    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
-    const minX = Math.min(...xs) - RX - 1, maxX = Math.max(...xs) + RX + 1;
-    const minY = Math.min(...ys) - S - 1, maxY = Math.max(...ys) + S + 1;
-    svg.setAttribute("viewBox",
-      minX.toFixed(2) + " " + minY.toFixed(2) + " " +
-      (maxX - minX).toFixed(2) + " " + (maxY - minY).toFixed(2));
-    const ordered = [...cubes].sort((a, b) => (a[0]+a[1]+a[2]) - (b[0]+b[1]+b[2]));
-    let frag = "";
-    for (const c of ordered) {
-      const [x, y] = pos(...c);
-      for (const f of faces(x, y)) {
-        frag += '<polygon points="' + f.map((p) => p[0].toFixed(2) + "," + p[1].toFixed(2)).join(" ") + '"/>';
-      }
-    }
-    svg.innerHTML = frag;
-  });
-
-  const burger = document.querySelector(".burger");
-  if (burger) {
-    burger.addEventListener("click", () => {
-      const open = document.body.classList.toggle("menu-open");
-      burger.setAttribute("aria-expanded", String(open));
-    });
-    document.querySelectorAll("header nav a").forEach((a) =>
-      a.addEventListener("click", () => {
-        document.body.classList.remove("menu-open");
-        burger.setAttribute("aria-expanded", "false");
-      }));
-  }
-})();
-</script>
 
 </body>
 </html>
