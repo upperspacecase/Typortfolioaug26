@@ -30,6 +30,8 @@
     --ink: #0f2361;
     --frame: clamp(12px, 4vw, 24px);
     --ease: cubic-bezier(.22, 1, .36, 1);
+    --px: 0px;   /* parallax offset, set by the script at the end of the page */
+    --py: 0px;
     --u: calc(100vh / 1280);
     --t: min(var(--u), calc(100vw / 720));
   }
@@ -55,7 +57,18 @@
     inset: 0;
     display: flex;
     justify-content: center;
+    transform-origin: 50% 33%;
     animation: settle 1.8s var(--ease) both, breathe 11s ease-in-out 1.8s infinite alternate;
+  }
+
+  /* ---------- a soft band of light that drifts slowly across the wall ---------- */
+  .light {
+    position: fixed;
+    inset: -10% -30%;
+    background: radial-gradient(ellipse 30% 65% at 50% 45%, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0) 70%);
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    animation: glow 2.6s ease both, drift 19s ease-in-out infinite alternate;
   }
 
   /* ---------- white frame around the whole screen ---------- */
@@ -65,6 +78,15 @@
     inset: 0;
     border: var(--frame) solid #fff;
     pointer-events: none;
+  }
+  /* slightly oversized so the parallax shift never shows an edge */
+  .backdrop picture {
+    flex: none;
+    display: block;
+    height: 100%;
+    scale: 1.03;
+    transform-origin: 50% 33%;   /* the nose of the board, so it keeps its distance from the links */
+    translate: var(--px) var(--py);
   }
   .backdrop img {
     flex: none;
@@ -86,6 +108,7 @@
     top: calc(96 * var(--t));
     left: calc(50% - 303 * var(--t));
     white-space: nowrap;
+    translate: calc(var(--px) * -0.35) calc(var(--py) * -0.35);
   }
   .copy > * { animation: rise 1.2s var(--ease) both; }
   .copy > h1 { animation-delay: .35s; }
@@ -131,19 +154,28 @@
     from { transform: scale(1); }
     to { transform: scale(1.025); }
   }
+  @keyframes glow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes drift {
+    from { transform: translateX(-34%); }
+    to { transform: translateX(34%); }
+  }
   @keyframes rise {
     from { opacity: 0; transform: translateY(calc(18 * var(--t))); }
     to { opacity: 1; transform: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .backdrop, .copy > * { animation: none; }
+    .light { display: none; }
   }
 
   /* ---------- short, wide screens (a phone on its side): copy left, board right ---------- */
   @media (orientation: landscape) and (max-height: 520px) {
     :root { --t: calc(100vh / 620); }
     .backdrop { justify-content: flex-end; }
-    .backdrop img { margin-right: calc(25vw - 1440 * var(--u)); }
+    .backdrop picture { margin-right: calc(25vw - 1440 * var(--u)); }
     .edge.r { display: none; }
     .copy { top: 50%; left: 6vw; transform: translateY(-50%); }
   }
@@ -159,6 +191,7 @@
   </picture>
   <div class="edge r"></div>
 </div>
+<div class="light" aria-hidden="true"></div>
 
 <main class="copy">
   <h1>ty pattison</h1>
@@ -172,6 +205,53 @@
     <a href="https://x.com/taytodde/articles" target="_blank" rel="noopener">writing</a>
   </nav>
 </main>
+
+<script>
+// Parallax: the board drifts a few pixels towards the pointer (or a dragging
+// finger, or the tilt of the phone where the browser allows it without asking),
+// and the copy drifts the other way. Eased every frame so it glides.
+(function () {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var root = document.documentElement;
+  var tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+  var MAX_X = 10, MAX_Y = 7;
+
+  function clamp(v) { return Math.max(-1, Math.min(1, v)); }
+  function frame() {
+    x += (tx - x) * 0.06;
+    y += (ty - y) * 0.06;
+    root.style.setProperty("--px", (x * MAX_X).toFixed(2) + "px");
+    root.style.setProperty("--py", (y * MAX_Y).toFixed(2) + "px");
+    raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.002 ? requestAnimationFrame(frame) : 0;
+  }
+  function aim(nx, ny) {
+    tx = clamp(nx); ty = clamp(ny);
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+  function fromPoint(px, py) {
+    aim(px / innerWidth * 2 - 1, py / innerHeight * 2 - 1);
+  }
+
+  addEventListener("mousemove", function (e) { fromPoint(e.clientX, e.clientY); }, { passive: true });
+  addEventListener("touchmove", function (e) {
+    var t = e.touches[0];
+    if (t) fromPoint(t.clientX, t.clientY);
+  }, { passive: true });
+  document.addEventListener("mouseleave", function () { aim(0, 0); });
+  addEventListener("touchend", function () { aim(0, 0); }, { passive: true });
+
+  // Tilt, only where it works without a permission prompt (iOS asks, so it is skipped there).
+  var D = window.DeviceOrientationEvent;
+  if (D && typeof D.requestPermission !== "function") {
+    var g0 = null, b0 = null;
+    addEventListener("deviceorientation", function (e) {
+      if (e.gamma == null || e.beta == null) return;
+      if (g0 === null) { g0 = e.gamma; b0 = e.beta; }
+      aim((e.gamma - g0) / 18, (e.beta - b0) / 18);
+    }, { passive: true });
+  }
+})();
+</script>
 
 </body>
 </html>
